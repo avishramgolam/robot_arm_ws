@@ -1,0 +1,38 @@
+[0.006s] Invoking command in '/home/avish-ramgolam/robot_arm_ws/build/robot_arm_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/avish-ramgolam/robot_arm_ws/build/robot_arm_description -- -j16 -l16
+[0.034s] Invoked command in '/home/avish-ramgolam/robot_arm_ws/build/robot_arm_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/avish-ramgolam/robot_arm_ws/build/robot_arm_description -- -j16 -l16
+[0.039s] Invoking command in '/home/avish-ramgolam/robot_arm_ws/build/robot_arm_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/avish-ramgolam/robot_arm_ws/build/robot_arm_description
+[0.045s] -- Install configuration: ""
+[0.045s] -- Execute custom install script
+[0.046s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/urdf/robot_arm.urdf.xacro
+[0.046s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/urdf/robot_arm_expanded.urdf
+[0.046s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/meshes/base_plate.stl
+[0.046s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/meshes/basement.stl
+[0.046s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/meshes/claw_support.stl
+[0.046s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/meshes/forward_drive_arm.stl
+[0.047s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/meshes/horizontal_arm.stl
+[0.047s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/meshes/left_finger.stl
+[0.047s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/meshes/link.stl
+[0.047s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/meshes/plate.stl
+[0.047s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/meshes/right_finger.stl
+[0.047s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/meshes/round_plate.stl
+[0.047s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/meshes/servo_plate.stl
+[0.047s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/meshes/triangular_link.stl
+[0.047s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/meshes/vertical_drive_arm.stl
+[0.047s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/launch/display.launch.py
+[0.047s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/config/robot_arm.rviz
+[0.048s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/ament_index/resource_index/package_run_dependencies/robot_arm_description
+[0.048s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/ament_index/resource_index/parent_prefix_path/robot_arm_description
+[0.048s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/environment/ament_prefix_path.sh
+[0.048s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/environment/ament_prefix_path.dsv
+[0.048s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/environment/path.sh
+[0.048s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/environment/path.dsv
+[0.049s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/local_setup.bash
+[0.049s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/local_setup.sh
+[0.049s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/local_setup.zsh
+[0.049s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/local_setup.dsv
+[0.049s] -- Symlinking: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/package.dsv
+[0.054s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/ament_index/resource_index/packages/robot_arm_description
+[0.054s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/cmake/robot_arm_descriptionConfig.cmake
+[0.054s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/cmake/robot_arm_descriptionConfig-version.cmake
+[0.054s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/package.xml
+[0.055s] Invoked command in '/home/avish-ramgolam/robot_arm_ws/build/robot_arm_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/avish-ramgolam/robot_arm_ws/build/robot_arm_description

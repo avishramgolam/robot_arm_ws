@@ -1,0 +1,40 @@
+# joint_limits.yaml
+# Overrides / supplements the URDF joint limits for MoveIt 2 planning.
+# has_velocity_limits / has_acceleration_limits: enable the respective bounds.
+
+joint_limits:
+  joint1:
+    has_velocity_limits: true
+    max_velocity: 1.0          # rad/s
+    has_acceleration_limits: true
+    max_acceleration: 2.0      # rad/s²
+
+  joint2:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 2.0
+
+  joint3:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 2.0
+
+  joint_claw:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 2.0
+
+  joint4:
+    has_velocity_limits: true
+    max_velocity: 0.5          # m/s  (prismatic)
+    has_acceleration_limits: true
+    max_acceleration: 1.0      # m/s²
+
+  joint_gripper_left:
+    has_velocity_limits: true
+    max_velocity: 0.5
+    has_acceleration_limits: true
+    max_acceleration: 1.0

@@ -1,0 +1,27 @@
+[0.005s] Invoking command in '/home/avish-ramgolam/robot_arm_ws/build/robot_arm_moveit_config': CMAKE_PREFIX_PATH=/home/avish-ramgolam/robot_arm_ws/install/robot_arm_description:/home/avish-ramgolam/robot_arm_ws/install/robot_arm_moveit_config:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/avish-ramgolam/robot_arm_ws/build/robot_arm_moveit_config -- -j16 -l16
+[0.032s] Invoked command in '/home/avish-ramgolam/robot_arm_ws/build/robot_arm_moveit_config' returned '0': CMAKE_PREFIX_PATH=/home/avish-ramgolam/robot_arm_ws/install/robot_arm_description:/home/avish-ramgolam/robot_arm_ws/install/robot_arm_moveit_config:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/avish-ramgolam/robot_arm_ws/build/robot_arm_moveit_config -- -j16 -l16
+[0.032s] Invoking command in '/home/avish-ramgolam/robot_arm_ws/build/robot_arm_moveit_config': CMAKE_PREFIX_PATH=/home/avish-ramgolam/robot_arm_ws/install/robot_arm_description:/home/avish-ramgolam/robot_arm_ws/install/robot_arm_moveit_config:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/avish-ramgolam/robot_arm_ws/build/robot_arm_moveit_config
+[0.036s] -- Install configuration: ""
+[0.036s] -- Execute custom install script
+[0.037s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_moveit_config/share/robot_arm_moveit_config/config/joint_limits.yaml
+[0.037s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_moveit_config/share/robot_arm_moveit_config/config/kinematics.yaml
+[0.037s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_moveit_config/share/robot_arm_moveit_config/config/moveit_controllers.yaml
+[0.037s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_moveit_config/share/robot_arm_moveit_config/config/ompl_planning.yaml
+[0.037s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_moveit_config/share/robot_arm_moveit_config/config/robot_arm.srdf
+[0.037s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_moveit_config/share/robot_arm_moveit_config/launch/demo.launch.py
+[0.037s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_moveit_config/share/ament_index/resource_index/package_run_dependencies/robot_arm_moveit_config
+[0.037s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_moveit_config/share/ament_index/resource_index/parent_prefix_path/robot_arm_moveit_config
+[0.037s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_moveit_config/share/robot_arm_moveit_config/environment/ament_prefix_path.sh
+[0.037s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_moveit_config/share/robot_arm_moveit_config/environment/ament_prefix_path.dsv
+[0.037s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_moveit_config/share/robot_arm_moveit_config/environment/path.sh
+[0.037s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_moveit_config/share/robot_arm_moveit_config/environment/path.dsv
+[0.037s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_moveit_config/share/robot_arm_moveit_config/local_setup.bash
+[0.038s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_moveit_config/share/robot_arm_moveit_config/local_setup.sh
+[0.038s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_moveit_config/share/robot_arm_moveit_config/local_setup.zsh
+[0.038s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_moveit_config/share/robot_arm_moveit_config/local_setup.dsv
+[0.038s] -- Symlinking: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_moveit_config/share/robot_arm_moveit_config/package.dsv
+[0.043s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_moveit_config/share/ament_index/resource_index/packages/robot_arm_moveit_config
+[0.044s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_moveit_config/share/robot_arm_moveit_config/cmake/robot_arm_moveit_configConfig.cmake
+[0.044s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_moveit_config/share/robot_arm_moveit_config/cmake/robot_arm_moveit_configConfig-version.cmake
+[0.044s] -- Up-to-date symlink: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_moveit_config/share/robot_arm_moveit_config/package.xml
+[0.045s] Invoked command in '/home/avish-ramgolam/robot_arm_ws/build/robot_arm_moveit_config' returned '0': CMAKE_PREFIX_PATH=/home/avish-ramgolam/robot_arm_ws/install/robot_arm_description:/home/avish-ramgolam/robot_arm_ws/install/robot_arm_moveit_config:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/avish-ramgolam/robot_arm_ws/build/robot_arm_moveit_config

@@ -1,0 +1,255 @@
+<?xml version="1.0"?>
+<robot name="robot_arm" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- =====================================================================
+       robot_arm.urdf.xacro
+       Industrial Robotics TP — Master 1 Robotics & Embedded Systems
+       Robot: 4-DOF robotic arm with parallel gripper
+       Architecture: Xacro (modular macros, includes, parameter reuse)
+  ====================================================================== -->
+
+  <!-- ── Constants ────────────────────────────────────────────────────── -->
+  <xacro:property name="PI" value="3.14159265358979"/>
+
+  <!-- Mesh scale: STL files are in mm → scale to metres -->
+  <xacro:property name="mesh_scale" value="0.01 0.01 0.01"/>
+
+  <!-- Default inertia helper: solid box approximation -->
+  <xacro:macro name="box_inertia" params="m x y z">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="${m}"/>
+      <inertia
+        ixx="${m*(y*y+z*z)/12}" ixy="0" ixz="0"
+        iyy="${m*(x*x+z*z)/12}" iyz="0"
+        izz="${m*(x*x+y*y)/12}"/>
+    </inertial>
+  </xacro:macro>
+
+  <!-- ================================================================
+       LINKS
+  ================================================================ -->
+
+  <!-- 1. world (virtual fixed origin) -->
+  <link name="world"/>
+
+  <!-- 2. base_link (basement / motor base) -->
+  <link name="base_link">
+    <xacro:box_inertia m="1.0" x="0.1" y="0.1" z="0.06"/>
+    <visual>
+      <origin rpy="0 0 0" xyz="-0.5 -0.5 0"/>
+      <geometry>
+        <mesh filename="package://robot_arm_description/meshes/basement.stl"
+              scale="${mesh_scale}"/>
+      </geometry>
+      <material name="white">
+        <color rgba="0.9 0.9 0.9 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.03" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.06"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- 3. base_plate (rotating shoulder base) -->
+  <link name="base_plate">
+    <xacro:box_inertia m="0.5" x="0.08" y="0.08" z="0.03"/>
+    <visual>
+      <origin rpy="0 0 0" xyz="-0.39 -0.39 -0.56"/>
+      <geometry>
+        <mesh filename="package://robot_arm_description/meshes/base_plate.stl"
+              scale="${mesh_scale}"/>
+      </geometry>
+      <material name="blue_dark">
+        <color rgba="0.1 0.1 0.6 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.04" length="0.03"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- 4. forward_drive_arm (first arm segment, vertical) -->
+  <link name="forward_drive_arm">
+    <xacro:box_inertia m="0.3" x="0.04" y="0.04" z="0.08"/>
+    <visual>
+      <origin rpy="0 -${PI/2} ${PI/2}" xyz="0.19 0.06 -0.08"/>
+      <geometry>
+        <mesh filename="package://robot_arm_description/meshes/forward_drive_arm.stl"
+              scale="${mesh_scale}"/>
+      </geometry>
+      <material name="grey_light">
+        <color rgba="0.75 0.75 0.75 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.04" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.04 0.04 0.08"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- 5. horizontal_arm (second arm segment, horizontal reach) -->
+  <link name="horizontal_arm">
+    <xacro:box_inertia m="0.25" x="0.08" y="0.04" z="0.04"/>
+    <visual>
+      <origin rpy="${PI/2} 0 ${PI/2}" xyz="-0.03 -0.4 -0.06"/>
+      <geometry>
+        <mesh filename="package://robot_arm_description/meshes/horizontal_arm.stl"
+              scale="${mesh_scale}"/>
+      </geometry>
+      <material name="grey_light"/>
+    </visual>
+    <collision>
+      <origin xyz="0.04 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.08 0.04 0.04"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- 6. claw_support (wrist / end-effector mounting plate) -->
+  <link name="claw_support">
+    <xacro:box_inertia m="0.15" x="0.04" y="0.04" z="0.02"/>
+    <visual>
+      <origin rpy="0 0 ${PI/2}" xyz="0 -0.05 -0.15"/>
+      <geometry>
+        <mesh filename="package://robot_arm_description/meshes/claw_support.stl"
+              scale="${mesh_scale}"/>
+      </geometry>
+      <material name="grey_dark">
+        <color rgba="0.4 0.4 0.4 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.04 0.04 0.02"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- 7. gripper_right (right finger — actively controlled, joint4) -->
+  <link name="gripper_right">
+    <xacro:box_inertia m="0.05" x="0.013" y="0.004" z="0.02"/>
+    <visual>
+      <origin rpy="0 0 -${PI/2}" xyz="-0.1 0.5 -0.1"/>
+      <geometry>
+        <mesh filename="package://robot_arm_description/meshes/right_finger.stl"
+              scale="${mesh_scale}"/>
+      </geometry>
+      <material name="blue_dark"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.01" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.013 0.004 0.02"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- 8. gripper_left (left finger — mirrors joint4 via mimic) -->
+  <link name="gripper_left">
+    <xacro:box_inertia m="0.05" x="0.013" y="0.004" z="0.02"/>
+    <visual>
+      <origin rpy="0 0 -${PI/2}" xyz="-0.04 0.5 -0.1"/>
+      <geometry>
+        <mesh filename="package://robot_arm_description/meshes/left_finger.stl"
+              scale="${mesh_scale}"/>
+      </geometry>
+      <material name="blue_dark"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.01" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.013 0.004 0.02"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- ================================================================
+       JOINTS
+  ================================================================ -->
+
+  <!-- J0 — world → base_link  (fixed: robot bolted to ground) -->
+  <joint name="world_to_base" type="fixed">
+    <parent link="world"/>
+    <child  link="base_link"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+  </joint>
+
+  <!-- J1 — base_link → base_plate  (revolute: waist rotation around Z)
+       Height offset: 3.07 cm (from TP diagram) -->
+  <joint name="joint1" type="revolute">
+    <parent link="base_link"/>
+    <child  link="base_plate"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0307"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-${PI/2}" upper="${PI/2}"
+           effort="100" velocity="1.0"/>
+  </joint>
+
+  <!-- J2 — base_plate → forward_drive_arm  (revolute: shoulder pitch around Y)
+       Height offset: 3.5 cm (from TP diagram) -->
+  <joint name="joint2" type="revolute">
+    <parent link="base_plate"/>
+    <child  link="forward_drive_arm"/>
+    <origin rpy="0 0 0" xyz="0 0 0.035"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-${PI/2}" upper="${PI/2}"
+           effort="100" velocity="1.0"/>
+  </joint>
+
+  <!-- J3 — forward_drive_arm → horizontal_arm  (revolute: elbow pitch around Y)
+       Height offset: 8 cm (from TP diagram) -->
+  <joint name="joint3" type="revolute">
+    <parent link="forward_drive_arm"/>
+    <child  link="horizontal_arm"/>
+    <origin rpy="0 0 0" xyz="0 0 0.08"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-${PI/2}" upper="${PI/2}"
+           effort="100" velocity="1.0"/>
+  </joint>
+
+  <!-- J_claw — horizontal_arm → claw_support  (revolute: wrist rotation)
+       Horizontal offset: 8.2 cm (from TP diagram) -->
+  <joint name="joint_claw" type="revolute">
+    <parent link="horizontal_arm"/>
+    <child  link="claw_support"/>
+    <origin rpy="0 0 0" xyz="0.082 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-${PI/2}" upper="${PI/2}"
+           effort="50" velocity="1.0"/>
+  </joint>
+
+  <!-- J4 — claw_support → gripper_right  (prismatic: finger open/close)
+       Range: 0 → 2.2 cm, offset 1 cm up (from TP diagram) -->
+  <joint name="joint4" type="prismatic">
+    <parent link="claw_support"/>
+    <child  link="gripper_right"/>
+    <origin rpy="0 0 0" xyz="0 0 0.01"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="0" upper="0.022"
+           effort="20" velocity="0.5"/>
+  </joint>
+
+  <!-- J_left — claw_support → gripper_left  (prismatic: mirrors joint4) -->
+  <joint name="joint_gripper_left" type="prismatic">
+    <parent link="claw_support"/>
+    <child  link="gripper_left"/>
+    <origin rpy="0 0 0" xyz="0 0 0.01"/>
+    <axis xyz="-1 0 0"/>
+    <limit lower="0" upper="0.022"
+           effort="20" velocity="0.5"/>
+    <!-- Mirror: left finger closes when right opens -->
+    <mimic joint="joint4" multiplier="-1"/>
+  </joint>
+
+</robot>

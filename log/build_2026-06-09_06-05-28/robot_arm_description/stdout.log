@@ -1,0 +1,39 @@
+-- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)
+-- Override CMake install command with custom implementation using symlinks instead of copying resources
+-- Configuring done (0.2s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/avish-ramgolam/robot_arm_ws/build/robot_arm_description
+-- Install configuration: ""
+-- Execute custom install script
+-- Symlinking: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/urdf/robot_arm.urdf.xacro
+-- Symlinking: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/urdf/robot_arm_expanded.urdf
+-- Symlinking: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/meshes/base_plate.stl
+-- Symlinking: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/meshes/basement.stl
+-- Symlinking: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/meshes/claw_support.stl
+-- Symlinking: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/meshes/forward_drive_arm.stl
+-- Symlinking: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/meshes/horizontal_arm.stl
+-- Symlinking: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/meshes/left_finger.stl
+-- Symlinking: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/meshes/link.stl
+-- Symlinking: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/meshes/plate.stl
+-- Symlinking: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/meshes/right_finger.stl
+-- Symlinking: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/meshes/round_plate.stl
+-- Symlinking: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/meshes/servo_plate.stl
+-- Symlinking: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/meshes/triangular_link.stl
+-- Symlinking: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/meshes/vertical_drive_arm.stl
+-- Symlinking: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/launch/display.launch.py
+-- Symlinking: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/config/robot_arm.rviz
+-- Symlinking: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/ament_index/resource_index/package_run_dependencies/robot_arm_description
+-- Symlinking: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/ament_index/resource_index/parent_prefix_path/robot_arm_description
+-- Symlinking: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/environment/ament_prefix_path.sh
+-- Symlinking: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/environment/ament_prefix_path.dsv
+-- Symlinking: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/environment/path.sh
+-- Symlinking: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/environment/path.dsv
+-- Symlinking: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/local_setup.bash
+-- Symlinking: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/local_setup.sh
+-- Symlinking: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/local_setup.zsh
+-- Symlinking: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/local_setup.dsv
+-- Symlinking: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/package.dsv
+-- Symlinking: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/ament_index/resource_index/packages/robot_arm_description
+-- Symlinking: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/cmake/robot_arm_descriptionConfig.cmake
+-- Symlinking: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/cmake/robot_arm_descriptionConfig-version.cmake
+-- Symlinking: /home/avish-ramgolam/robot_arm_ws/install/robot_arm_description/share/robot_arm_description/package.xml
