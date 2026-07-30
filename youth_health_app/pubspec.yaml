@@ -1,0 +1,37 @@
+name: youth_health_app
+description: >-
+  Free, global, anonymous youth health & sex-education app.
+  Privacy-first: no accounts, no personal data, offline-cached resources.
+publish_to: "none"
+version: 0.1.0+1
+
+# Color.withValues + CardThemeData require Flutter 3.27+ / Dart 3.6+.
+environment:
+  sdk: ">=3.6.0 <4.0.0"
+  flutter: ">=3.27.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Reactive state management (providers, notifiers).
+  flutter_riverpod: ^2.5.1
+
+  # Renders AI answers as scannable Markdown (headings, bullets, bold).
+  flutter_markdown: ^0.7.3
+
+  # Tap-to-call / tap-to-text for the emergency hotlines directory.
+  url_launcher: ^6.3.0
+
+  # NOTE: google_fonts is intentionally NOT used. It fetches font files over
+  # the network at runtime, which is an avoidable outbound request in a
+  # privacy-first app. Bundle .ttf files under assets/fonts/ instead if a
+  # custom typeface is required, and declare them in the `fonts:` section.
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
