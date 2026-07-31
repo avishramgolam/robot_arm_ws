@@ -1,0 +1,5 @@
+fastapi>=0.111
+uvicorn[standard]>=0.30
+anthropic>=0.50
+asyncpg>=0.29
+pydantic-settings>=2.3

@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HealthGuide — Expert Review</title>
+<style>
+  :root {
+    --slate: #3E5C76; --teal: #5FAE9C; --rose: #C98A98;
+    --bg: #F7F6F3; --ink: #2A2D34; --muted: #6B7280;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: system-ui, sans-serif; background: var(--bg); color: var(--ink); }
+  header { background: var(--slate); color: #fff; padding: 14px 24px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+  header h1 { font-size: 17px; margin: 0; font-weight: 700; }
+  header input { border: none; border-radius: 8px; padding: 8px 10px; min-width: 240px; }
+  header button, .card button { border: none; border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer; }
+  header label { font-size: 13px; display: flex; gap: 6px; align-items: center; }
+  main { max-width: 900px; margin: 24px auto; padding: 0 16px; display: grid; gap: 16px; }
+  .card { background: #fff; border-radius: 14px; padding: 18px; border: 1px solid rgba(0,0,0,.07); }
+  .badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+  .badge { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 10px; background: #EDEAF6; color: var(--slate); }
+  .badge.low { background: #F7E3E8; color: var(--rose); }
+  .badge.flag { background: var(--rose); color: #fff; }
+  .q { font-weight: 700; margin: 4px 0 8px; }
+  .a { white-space: pre-wrap; font-size: 14px; line-height: 1.5; }
+  details { margin-top: 8px; font-size: 13px; color: var(--muted); }
+  textarea { width: 100%; min-height: 110px; margin-top: 10px; border-radius: 10px; border: 1px solid #ccc; padding: 10px; font: inherit; }
+  .actions { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+  .approve { background: var(--teal); color: #fff; }
+  .rewrite { background: var(--slate); color: #fff; }
+  .reject  { background: var(--rose); color: #fff; }
+  .empty { text-align: center; color: var(--muted); padding: 40px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>HealthGuide · Expert Review Queue</h1>
+  <input id="token" type="password" placeholder="Admin token">
+  <input id="reviewer" type="text" placeholder="Your name / clinician ID">
+  <label><input id="flaggedOnly" type="checkbox"> flagged only</label>
+  <button onclick="load()" style="background:#5FAE9C;color:#fff">Load queue</button>
+</header>
+<main id="list"><div class="empty">Enter the admin token and load the queue.</div></main>
+
+<script>
+const list = document.getElementById('list');
+const headers = () => ({
+  'Authorization': 'Bearer ' + document.getElementById('token').value,
+  'Content-Type': 'application/json',
+});
+
+async function load() {
+  const flagged = document.getElementById('flaggedOnly').checked;
+  const res = await fetch(`/admin/review/pending?flagged_only=${flagged}`, { headers: headers() });
+  if (!res.ok) { list.innerHTML = `<div class="empty">Error ${res.status} — check the admin token.</div>`; return; }
+  const items = await res.json();
+  if (!items.length) { list.innerHTML = '<div class="empty">Queue is empty 🎉</div>'; return; }
+  list.innerHTML = items.map(card).join('');
+}
+
+function esc(s) {
+  return (s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function card(item) {
+  const conf = (item.confidence_level || '?').toUpperCase();
+  return `
+  <div class="card" id="card-${item.id}">
+    <div class="badges">
+      <span class="badge ${conf === 'LOW' ? 'low' : ''}">Confidence: ${esc(conf)}</span>
+      ${item.flagged_for_review ? `<span class="badge flag">FLAGGED: ${esc(item.flag_reason || '')}</span>` : ''}
+      <span class="badge">${esc((item.created_at || '').slice(0, 16))}</span>
+    </div>
+    <div class="q">Q: ${esc(item.user_query)}</div>
+    <div class="a">${esc(item.ai_generated_response)}</div>
+    <details><summary>Retrieved context</summary><pre>${esc(item.retrieved_context)}</pre></details>
+    <textarea id="rw-${item.id}" placeholder="Corrected answer (required for Rewrite). Approving indexes the AI answer as expert-verified; rewriting indexes your correction instead."></textarea>
+    <div class="actions">
+      <button class="approve" onclick="decide('${item.id}', 'APPROVED')">Approve</button>
+      <button class="rewrite" onclick="decide('${item.id}', 'REWRITTEN')">Save rewrite</button>
+      <button class="reject"  onclick="decide('${item.id}', 'REJECTED')">Reject</button>
+    </div>
+  </div>`;
+}
+
+async function decide(id, status) {
+  const reviewer = document.getElementById('reviewer').value.trim();
+  if (!reviewer) { alert('Enter your name / clinician ID first.'); return; }
+  const rewrite = document.getElementById('rw-' + id).value.trim();
+  if (status === 'REWRITTEN' && !rewrite) { alert('Rewrite text is required.'); return; }
+  const res = await fetch('/admin/review/' + id, {
+    method: 'POST',
+    headers: headers(),
+    body: JSON.stringify({
+      status,
+      expert_rewritten_response: status === 'REWRITTEN' ? rewrite : null,
+      reviewed_by: reviewer,
+    }),
+  });
+  if (res.ok) { document.getElementById('card-' + id).remove(); }
+  else { alert('Failed: ' + res.status); }
+}
+</script>
+</body>
+</html>
