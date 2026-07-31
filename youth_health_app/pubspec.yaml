@@ -23,6 +23,9 @@ dependencies:
   # Tap-to-call / tap-to-text for the emergency hotlines directory.
   url_launcher: ^6.3.0
 
+  # SSE streaming client for the HealthGuide RAG backend (backend/ in repo).
+  http: ^1.2.0
+
   # NOTE: google_fonts is intentionally NOT used. It fetches font files over
   # the network at runtime, which is an avoidable outbound request in a
   # privacy-first app. Bundle .ttf files under assets/fonts/ instead if a

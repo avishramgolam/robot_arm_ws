@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../data/rag_api_client.dart';
 import '../models/chat_message.dart';
 
 /// Quick-tag chips shown above the input bar. Tapping one pre-fills the
@@ -22,11 +23,15 @@ const quickTags = <(String label, String prompt)>[
 /// list so `ref.watch` consumers rebuild exactly once per change.
 class ChatNotifier extends Notifier<List<ChatMessage>> {
   Timer? _streamTimer;
+  RagApiClient? _api;
   int _idSeq = 0;
 
   @override
   List<ChatMessage> build() {
-    ref.onDispose(() => _streamTimer?.cancel());
+    ref.onDispose(() {
+      _streamTimer?.cancel();
+      _api?.dispose();
+    });
     // Warm, non-judgmental opener. History is memory-only — closing the app
     // (or panic-exiting and killing it) leaves no trace.
     return [
@@ -36,7 +41,8 @@ class ChatNotifier extends Notifier<List<ChatMessage>> {
         text:
             "Hi — I'm here to answer your questions about health, bodies, and "
             'relationships. **No question is weird or embarrassing.** '
-            "Everything here is anonymous: no account, no name, nothing saved.\n\n"
+            'Everything here is anonymous — no account, no name, and nothing '
+            'that can identify you is ever stored.\n\n'
             'What would you like to know?',
       ),
     ];
@@ -76,23 +82,64 @@ class ChatNotifier extends Notifier<List<ChatMessage>> {
   }
 
   // --------------------------------------------------------------------------
-  // BACKEND INTEGRATION POINT
+  // BACKEND INTEGRATION
   //
-  // Replace `_streamAnswer` with a call to your RAG service, e.g.:
-  //
-  //   final stream = ragClient.ask(question);          // Stream<Token>
-  //   await for (final token in stream) {
-  //     _patch(assistantId, (m) => m.copyWith(text: m.text + token.text));
-  //   }
-  //   _patch(assistantId, (m) => m.copyWith(
-  //     isStreaming: false,
-  //     sources: token.citations.map(...).toList(),
-  //   ));
-  //
-  // The word-by-word Timer below simulates that stream so the full UI
-  // (typing indicator → progressive text → source badges) is testable today.
+  // When the app is built with --dart-define=RAG_API_URL=<backend url>, the
+  // real HealthGuide backend streams the answer (see data/rag_api_client.dart
+  // and backend/ in the repo root). Without it, the word-by-word Timer below
+  // simulates the stream so the full UI stays testable offline.
   // --------------------------------------------------------------------------
   void _streamAnswer(String assistantId, String question) {
+    if (RagApiClient.isConfigured) {
+      unawaited(_streamFromBackend(assistantId, question));
+      return;
+    }
+    _simulateStream(assistantId, question);
+  }
+
+  /// Real backend path: forwards SSE events into message patches.
+  Future<void> _streamFromBackend(String assistantId, String question) async {
+    _api ??= RagApiClient();
+    try {
+      await for (final event in _api!.ask(question)) {
+        switch (event) {
+          case RagToken(:final text):
+            _patch(assistantId, (m) => m.copyWith(text: m.text + text));
+          case RagMeta(:final sources, :final expertVerified):
+            _patch(
+              assistantId,
+              (m) => m.copyWith(
+                sources: [
+                  if (expertVerified)
+                    const SourceBadge(label: 'Reviewed by a health professional'),
+                  for (final label in sources)
+                    SourceBadge(label: 'Verified: $label'),
+                ],
+              ),
+            );
+          case RagDone():
+            _patch(assistantId, (m) => m.copyWith(isStreaming: false));
+        }
+      }
+    } catch (_) {
+      // Network failure: keep the tone calm, never surface raw errors.
+      _patch(
+        assistantId,
+        (m) => m.copyWith(
+          isStreaming: false,
+          text: m.text.isNotEmpty
+              ? m.text
+              : "I couldn't connect just now — please try again in a moment. "
+                  'The Guides and Support tabs work fully offline.',
+        ),
+      );
+    }
+    // Safety net: ensure the streaming flag is always cleared.
+    _patch(assistantId, (m) => m.copyWith(isStreaming: false));
+  }
+
+  /// Offline/demo path: simulated word-by-word stream.
+  void _simulateStream(String assistantId, String question) {
     const demoAnswer =
         "That's a really good question — and a very common one.\n\n"
         'Here are the key things to know:\n\n'

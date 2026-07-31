@@ -58,8 +58,11 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
             width: double.infinity,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
             color: AppColors.lavenderTint,
+            // Honest disclosure: questions are reviewed anonymously by health
+            // professionals to improve answers — never tied to a person.
             child: const Text(
-              'Anonymous · Nothing is saved · Not a substitute for medical care',
+              'Anonymous — no account, no name · Questions may be reviewed '
+              'anonymously by health professionals · Not medical care',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 11.5, color: AppColors.slateDark),
             ),
